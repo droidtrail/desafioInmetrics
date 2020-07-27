@@ -19,11 +19,12 @@ import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 
-public class CrudFuncSteps {
+public class CrudFuncSteps{
 	private WebDriver driver;
 
 	@Dado("que eu logue no sistema")
 	public void queEuLogueNoSistema() {
+		
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("http://www.inmrobo.tk/accounts/login/");
@@ -34,6 +35,7 @@ public class CrudFuncSteps {
 
 	@Quando("eu clicar na opção Novo Funcionário")
 	public void euClicarNaOpçãoNovoFuncionário() {
+		
 		driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[2]/a")).click();
 	}
 
