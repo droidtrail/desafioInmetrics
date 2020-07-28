@@ -1,10 +1,11 @@
 package br.com.inmetrics.teste.steps;
 
-import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import br.com.inmetrics.teste.pages.loginPage;
+import io.cucumber.java.After;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 
@@ -12,7 +13,11 @@ import io.cucumber.java.pt.Quando;
 
 public class LoginSteps {
 	
-	private WebDriver driver;
+	WebDriver driver=null;
+	
+	//private WebDriver driver;
+	//loginPage login = new loginPage(driver);
+	loginPage login;
 
 	@Quando("^eu acessar a tela de Login$")
 	public void euAcessarATelaDeLogin() throws Throwable {
@@ -23,22 +28,31 @@ public class LoginSteps {
 
 	@Quando("^informar o usuário já registrado$")
 	public void informarOUsuárioJáRegistrado() throws Throwable {
-	   driver.findElement(By.name("username")).sendKeys("LeandroPereira");
+		
+		login = new loginPage(driver);
+		login.informarUsuario("LeandroPereira");
+	   //driver.findElement(By.name("username")).sendKeys("LeandroPereira");
 	}
 
 	@Quando("^a senha$")
 	public void aSenha() throws Throwable {
-	    driver.findElement(By.name("pass")).sendKeys("123");
+		login.informarSenha("123");
+	    //driver.findElement(By.name("pass")).sendKeys("123");
 	}
 	
 	@Quando("^clicar no botão Entre$")
 	public void clicarNoBotãoEntre() throws Throwable {
-		driver.findElement(By.xpath("//button[@class='login100-form-btn']")).click();
+		
+		login.clicarBtnLogin();
+		//driver.findElement(By.xpath("//button[@class='login100-form-btn']")).click();
 	}
 
 	@Então("^o sistema deve permitir o meu acesso$")
 	public void oSistemaDevePermitirOMeuAcesso() throws Throwable {
-	    driver.findElement(By.xpath("//input[@type='search']")).isDisplayed();
+
+		login.verificarCampoDePesquisaEstaVisivel();
+		
+		//driver.findElement(By.xpath("//input[@type='search']")).isDisplayed();
 	   
 	}
 	
